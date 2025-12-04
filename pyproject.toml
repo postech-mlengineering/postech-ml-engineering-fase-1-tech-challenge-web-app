@@ -1,0 +1,24 @@
+[project]
+name = "postech-ml-techchallenge-fase-1-streamlit"
+version = "0.1.0"
+description = "Aplicativo Streamlit para o Tech Challenge da Fase 1 da Pós-Graduação em Machine Learning Engineering da FIAP"
+authors = [
+    {name = "jorgeplatero",email = "jorge.platero@outlook.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11, <4.0"
+dependencies = [
+    "streamlit (>=1.51.0,<2.0.0)",
+    "pandas (>=2.3.3,<3.0.0)",
+    "requests (>=2.32.5,<3.0.0)"
+]
+
+
+[tool.poetry]
+package-mode = false
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
