@@ -15,9 +15,10 @@ logger = logging.getLogger(__name__)
 
 
 def show() -> None:
+    '''Conteúdo da página de acervo'''
     #gerenciando sessao
     set_cookies('page', 'collection')
-    token = get_cookies('token_acesso')
+    token = get_cookies('access_token')
     user_id = get_cookies('user_id')
 
     #filtros
@@ -36,7 +37,7 @@ def show() -> None:
                 st.sidebar.markdown('### Título ou Gênero') 
                 title = st.sidebar.text_input('Título', placeholder='Ex: The White Queen', key='input_title')
                 genres = get_all_genres(token)
-                options = ['Todas'] + [c['category'] for c in genres] if genres else ['Todas']
+                options = ['Todas'] + [c['genre'] for c in genres] if genres else ['Todas']
                 option = st.sidebar.selectbox('Gênero', options=options, key='input_genre')
             if title_genre_filter and price_range_filter:
                 st.sidebar.divider()
@@ -46,22 +47,22 @@ def show() -> None:
                 p_max = st.sidebar.number_input('Máximo (£)', min_value=0.0, value=100.0, step=1.0)
             st.sidebar.write('')
             if st.sidebar.button('Aplicar', type='primary', width='stretch'):
-                category = None if option == 'Todas' else option
+                genre = None if option == 'Todas' else option
                 
                 if price_range_filter and not title_genre_filter:
                     st.session_state.books_collection = get_books_by_price_range(token, p_min, p_max)
                 elif title_genre_filter and not price_range_filter:
-                    if not title and not category:
+                    if not title and not genre:
                         st.session_state.books_collection = get_top_rated(token, limit=10)
                     else:
-                        st.session_state.books_collection = get_books_by_search(token, title=title or None, genre=category)
+                        st.session_state.books_collection = get_books_by_search(token, title=title or None, genre=genre)
                 elif price_range_filter and title_genre_filter:
                     books_raw = get_books_by_price_range(token, p_min, p_max)
                     if isinstance(books_raw, list):
                         st.session_state.books_collection = [
                             b for b in books_raw 
                             if (not title or title.lower() in b.get('title', '').lower()) and
-                            (not category or b.get('genre') == category)
+                            (not genre or b.get('genre') == genre)
                         ]
                 st.session_state.filtros_ativos = True
     else:
@@ -72,7 +73,11 @@ def show() -> None:
         st.sidebar.info('Ative os filtros acima para consulta')
 
     #título
-    st.title('Acervo')
+    col1, col2 = st.columns([.05, .95])
+    with col1:
+        st.image('img/logo2.png', width='stretch')
+    with col2:
+        st.title('Books2Scrape | Acervo')
     #botao de voltar
     _, col2 = st.columns([0.9, 0.1])
     with col2:
@@ -82,7 +87,7 @@ def show() -> None:
     st.markdown('---')
 
     #recomendações
-    st.subheader('⭐ Recomendados para você')
+    st.subheader('Recomendados para você! ✨')
     with st.container(border=True):
         user_id = int(user_id) if user_id else 0
         prefs = get_user_preferences(token, user_id)
@@ -105,9 +110,9 @@ def show() -> None:
                 st.session_state.pref_index += 3
                 st.rerun()
         idx = st.session_state.pref_index
-        livros_visiveis = user_prefs[idx : idx + 3]
+        books = user_prefs[idx : idx + 3]
         cols_pref = st.columns(3)
-        for i, book in enumerate(livros_visiveis):
+        for i, book in enumerate(books):
             with cols_pref[i]:
                 with st.container(border=True):
                     url_img = book.get('image_url') or 'https://via.placeholder.com/150x200?text=Sem+Capa'
@@ -124,7 +129,7 @@ def show() -> None:
                     st.caption(f"🔥 {book.get('similarity_score', 0):.2%} similar")
                     if st.button('Detalhes', key=f'btn_pref_{book.get("id")}_{idx+i}', width='stretch'):
                         details(book.get('id'), token)
-    
+    st.markdown('---')
     #acervo
     #inicializa o catálogo no estado da sessão
     if 'books_collection' not in st.session_state:

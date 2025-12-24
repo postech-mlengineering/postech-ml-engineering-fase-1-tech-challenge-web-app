@@ -33,7 +33,7 @@ def get_stats_overview(token: str) -> Optional[Dict[str, Any]]:
         return None
 
 
-def get_stats_by_category(token: str) -> List[Dict[str, Any]]:
+def get_stats_by_genre(token: str) -> List[Dict[str, Any]]:
     '''
     Recupera métricas detalhadas agrupadas por gênero.
 
@@ -42,17 +42,17 @@ def get_stats_by_category(token: str) -> List[Dict[str, Any]]:
 
     Returns:
         Uma lista de dicionários, onde cada item contém:
-            - category (str): Nome da categoria.
+            - genre (str): Nome do gênero.
             - avg_price (float): Média de preço naquela categoria.
     '''
     headers = {'Authorization': f'Bearer {token}'}
     try:
-        response = requests.get(f'{URL_BASE}/stats/categories', headers=headers, timeout=5)
+        response = requests.get(f'{URL_BASE}/stats/genres', headers=headers, timeout=5)
         if response.status_code == 200:
             return response.json()
         
-        logger.warning(f'Falha ao obter stats por categoria. Status: {response.status_code}')
+        logger.warning(f'Falha ao obter estatísticas por gênero. Status: {response.status_code}')
         return []
     except Exception as e:
-        logger.error(f'Erro ao buscar stats por categoria: {e}')
+        logger.error(f'Erro ao buscar estatísticas por gênero: {e}')
         return []

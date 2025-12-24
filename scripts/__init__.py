@@ -15,7 +15,7 @@ def remove_cookies() -> None:
     '''
     Remove todos os cookies de sessão relacionados à autenticação e navegação.
     '''
-    controller.remove('token_acesso')
+    controller.remove('access_token')
     controller.remove('user_id')
     controller.remove('username')
     controller.remove('logged_in')
@@ -27,10 +27,10 @@ def get_all_cookies() -> Tuple[Optional[str], Optional[int], Optional[str], Opti
     Recupera os valores de todos os cookies principais da aplicação.
 
     Returns:
-        Uma tupla contendo (token_acesso, user_id, username, logged_in, page).
+        Uma tupla contendo (access_token, user_id, username, logged_in, page).
     '''
     return (
-        controller.get('token_acesso'),
+        controller.get('access_token'),
         controller.get('user_id'),
         controller.get('username'),
         controller.get('logged_in'),
@@ -61,7 +61,7 @@ def set_all_cookies(token: str, user_id: int, usuario: str, page: str) -> None:
         usuario (str): Nome de exibição do usuário.
         page (str): Nome da página atual para persistência de navegação.
     '''
-    set_cookies('token_acesso', token)
+    set_cookies('access_token', token)
     set_cookies('user_id', user_id)
     set_cookies('username', usuario)
     set_cookies('page', page)

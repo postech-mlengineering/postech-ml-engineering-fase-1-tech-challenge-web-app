@@ -61,5 +61,5 @@ def input_user_preferences(token: str, book_id: int) -> Tuple[Optional[List[Dict
             
         return None, error_msg
     except Exception as e:
-        logger.error(f'Erro em input_user_preference: {e}')
+        logger.error(f'error: {e}')
         return None, str(e)

@@ -5,31 +5,31 @@ from scripts import get_cookies
 PAGES_CONFIG = {
     'login': {
         'title': 'Login', 
-        'icon': 'img/logo.ico'
+        'icon': 'img/logo2.ico'
     },
     'register': {
         'title': 'Cadastro', 
-        'icon': 'img/logo.ico'
+        'icon': 'img/logo2.ico'
     },
     'menu': {
-        'title': 'Início', 
-        'icon': 'img/logo.ico'
+        'title': 'Menu', 
+        'icon': 'img/logo2.ico'
     },
     'collection': {
-        'title': 'Catálogo', 
-        'icon': 'img/logo.ico'
+        'title': 'Acervo', 
+        'icon': 'img/logo2.ico'
     },
     'stats': {
         'title': 'Estatísticas', 
-        'icon': 'img/logo.ico'
+        'icon': 'img/logo2.ico'
     },
     'preferences': {
         'title': 'Preferences', 
-        'icon': 'img/logo.ico'
+        'icon': 'img/logo2.ico'
     }
 }
 
-st.session_state.token_acesso = get_cookies('token_acesso')
+st.session_state.access_token = get_cookies('access_token')
 st.session_state.page = get_cookies('page')
 st.session_state.user_id = get_cookies('user_id')
 st.session_state.username = get_cookies('username')

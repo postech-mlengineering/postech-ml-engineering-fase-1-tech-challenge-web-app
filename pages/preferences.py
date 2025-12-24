@@ -10,17 +10,22 @@ logger = logging.getLogger(__name__)
 
 
 def show() -> None:
+    '''Conteúdo da página de personalização'''
     #gerenciando sessao
-    token = get_cookies('token_acesso')
+    token = get_cookies('access_token')
     set_cookies('page', 'preferences')
     
     #inicializa o estado do gênero
     if 'selected_genre' not in st.session_state:
         st.session_state.selected_genre = None
-
-    #titulo
-    st.title('⭐ Personalize sua experiência!')
-    st.markdown('#### Favorite um título para receber recomendações')
+    #título
+    col1, col2 = st.columns([.05, .95])
+    with col1:
+        st.image('img/logo2.png', width='stretch')
+    with col2:
+        st.title('Books2Scrape | Preferências')
+    _, col2 = st.columns([0.9, 0.1])
+    st.markdown('#### Favorite um título para receber recomendações incríveis')
     st.markdown('---')
 
     #inicializa o acervo completo
@@ -50,8 +55,8 @@ def show() -> None:
 
     #acervo
     else:
-        _, col2 = st.columns([0.9, 0.1])
-        with col2:
+        col1, _ = st.columns([0.1, 0.9])
+        with col1:
             if st.button('←', help='Voltar aos Gêneros', width='stretch'):
                 st.session_state.selected_genre = None
                 st.rerun()
@@ -63,7 +68,7 @@ def show() -> None:
                 st.session_state.selected_genre = None
                 st.rerun()
         else:
-            st.write(f'**{len(books)}** resultados')
+            st.write(f'**{len(books)}** resultado(s)')
             for i in range(0, len(books), 3):
                 cols = st.columns(3)
                 for j in range(3):
@@ -89,7 +94,7 @@ def show() -> None:
                                 
                                 if st.button('Detalhes', key=f'btn_{book_id}_{i+j}', width='stretch'):
                                     details(book_id, token)
-                                if st.button('Escolher', key=f'ml_{book_id}_{i+j}', width='stretch', type='primary'):
+                                if st.button('Favoritar', key=f'ml_{book_id}_{i+j}', width='stretch', type='primary'):
                                     try:
                                         _, error_msg = input_user_preferences(token, book_id)
                                         if error_msg:

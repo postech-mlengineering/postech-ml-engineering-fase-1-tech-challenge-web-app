@@ -24,7 +24,7 @@ def get_all_book_titles(token: str) -> List[Dict[str, str]]:
             return response.json()
         return []
     except Exception as e:
-        logger.error(f'Erro ao buscar títulos: {e}')
+        logger.error(f'error: {e}')
         return []
 
 
@@ -46,7 +46,7 @@ def get_book_details(token: str, book_id: Union[int, str]) -> Optional[Dict[str,
             return response.json()
         return None
     except Exception as e:
-        logger.error(f'Erro ao buscar detalhes do livro {book_id}: {e}')
+        logger.error(f'error: {e}')
         return None
 
 
@@ -80,7 +80,7 @@ def get_books_by_search(
             return response.json()
         return []
     except Exception as e:
-        logger.error(f'Erro na pesquisa de livros: {e}')
+        logger.error(f'error: {e}')
         return []
 
 
@@ -108,7 +108,7 @@ def get_books_by_price_range(
             return response.json()
         return []
     except Exception as e:
-        logger.error(f'Erro ao buscar livros por preço: {e}')
+        logger.error(f'error: {e}')
         return []
 
 
@@ -131,5 +131,5 @@ def get_top_rated(token: str, limit: int = 1000) -> List[Dict[str, Any]]:
             return response.json()
         return []
     except Exception as e:
-        logger.error(f'Erro ao buscar top rated: {e}')
+        logger.error(f'error: {e}')
         return []

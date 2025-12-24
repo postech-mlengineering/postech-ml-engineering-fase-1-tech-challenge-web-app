@@ -7,6 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 def show() -> None:
+    '''Conteúdo da página de menu'''
     #css para ocultar sidebar
     st.markdown(
         '''
@@ -18,10 +19,14 @@ def show() -> None:
         ''',
         unsafe_allow_html=True
     )
-
     #título
-    st.title('Books2Scrape')
-    _, col2 = st.columns([0.85, 0.15])
+    col1, col2 = st.columns([.05, .95])
+    with col1:
+        st.image('img/logo2.png', width='stretch')
+    with col2:
+        st.title('Books2Scrape | Menu')
+    _, col2 = st.columns([0.9, 0.1])
+
     #botão de sair
     with col2:
         if st.button('Sair', help='Sair do aplicativo', width='stretch'):
@@ -29,12 +34,10 @@ def show() -> None:
             st.session_state.clear() 
             st.rerun()
 
-    st.subheader('Início')
     st.markdown('---')
-    
+
     #opções
     col1, col2 = st.columns(2)
-    
     with col1:
         with st.container(border=True):
             st.subheader('Acervo')

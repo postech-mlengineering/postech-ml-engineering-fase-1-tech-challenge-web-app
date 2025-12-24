@@ -28,10 +28,10 @@ def login(usuario: str, senha: str) -> Tuple[Optional[str], Optional[int], Optio
             return token, user_id, None
         try:
             data = response.json()
-            msg_erro = data.get('error', 'Credenciais inválidas.')
+            error_msg = data.get('error', 'Credenciais inválidas.')
         except Exception:
-            msg_erro = f'Erro no servidor (Status {response.status_code})'
-        return None, None, msg_erro
+            error_msg = f'Erro no servidor (Status {response.status_code})'
+        return None, None, error_msg
     except requests.exceptions.ConnectionError:
         logger.error(f'Falha de conexão: {URL_BASE}')
         return None, None, 'Não foi possível conectar ao servidor.'
@@ -49,7 +49,7 @@ def register(usuario: str, senha: str) -> Tuple[bool, Union[str, Dict[str, Any]]
         senha: A senha para a nova conta.
 
     Returns:
-        Uma tupla contendo (sucesso, dados_ou_mensagem).
+        Uma tupla contendo (True/False, retorno da API).
     '''
     try:
         response = requests.post(
@@ -58,13 +58,13 @@ def register(usuario: str, senha: str) -> Tuple[bool, Union[str, Dict[str, Any]]
             timeout=5
         )
         try:
-            dados = response.json()
+            data = response.json()
         except requests.exceptions.JSONDecodeError:
             return False, f'Resposta inválida do servidor (Status: {response.status_code}).'
 
         if response.status_code == 201:
-            return True, dados
-        return False, dados.get('error', 'Falha ao realizar o registro.')
+            return True, data
+        return False, data.get('error', 'Falha ao realizar o registro.')
     except requests.exceptions.ConnectionError:
         logger.error(f'Falha de conexão em register: {URL_BASE}')
         return False, 'Erro de conexão: servidor offline.'
