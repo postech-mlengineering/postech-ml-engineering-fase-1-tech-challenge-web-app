@@ -139,7 +139,7 @@ Este aplicativo é a camada de consumo final e depende da comunicação com a AP
 
 - **Repositório da API:** https://github.com/postech-mlengineering/postech-ml-techchallenge-fase-1-api
 
-- **Repositório de Orquestração:** https://github.com/postech-mlengineering/postech-ml-techchallenge-fase-1-airflow/tree/main
+- **Repositório do Airflow:** https://github.com/postech-mlengineering/postech-ml-techchallenge-fase-1-airflow/tree/main
 
 ### Deploy
 
