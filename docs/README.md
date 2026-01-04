@@ -73,7 +73,7 @@ poetry install
 
 ### Como Rodar a Aplicação
 
-**Via Docker (Recomendado):**
+**Docker:**
 
 Execute o comando abaixo para subir o ambiente completo (API + Dependências):
 
