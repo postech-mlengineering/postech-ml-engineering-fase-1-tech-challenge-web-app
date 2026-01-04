@@ -52,8 +52,6 @@ graph LR
     MLEngine --> Streamlit
 ```
 
----
-
 ### Pré-requisitos
 
 Certifique-se de ter o Python 3.11 e o Poetry instalados.
@@ -75,25 +73,35 @@ poetry install
 
 ### Como Rodar a Aplicação
 
+**Via Docker (Recomendado):**
+
+Execute o comando abaixo para subir o ambiente completo (API + Dependências):
+
+```bash
+docker-compose up --build
+```
+
+**Local:**
 
 Para iniciar o servidor do Streamlit localmente:
+
 ```bash
 poetry run streamlit run main.py
 ```
+
 O aplicativo estará disponível em `http://localhost:8501`. 
 
-Certifique-se de que a API esteja rodando para que o aplicativo possa autenticar e buscar os dados.
-
+Certifique-se de que a API esteja em produção para que o aplicativo possa autenticar e buscar os dados.
 
 ### Funcionalidades
 
-#### 1. Autenticação
+#### Autenticação
 
 O aplicativo implementa um fluxo completo de controle de acesso e persistência de sessão.
 
 *   **Cadastro e Login:** interfaces dedicadas para criação de novas contas e autenticação de usuários existentes, integradas ao sistema de permissões da API
 
-#### 2. Acervo
+#### Acervo
 
 Módulo projetado para o consumo dinâmico do catálogo de livros com foco em experiência de usuário (UX).
 
@@ -102,13 +110,13 @@ Módulo projetado para o consumo dinâmico do catálogo de livros com foco em ex
 *   **Detalhamento:** uso de janelas de diálogo para exibição de informações técnicas completas e descrições semânticas sem perda de contexto da navegação
 *   **Recomendações:** carrossel paginado e interativo que apresenta livros com os maiores pontuações de similaridade calculados pelo modelo TF-IDF
 
-#### 3. Personalização 
+#### Personalização 
 
 Interface de interação direta com a camada de inteligência da aplicação para personalização do perfil.
 
 *   **Preferências:** fluxo guiado onde o usuário seleciona gêneros de interesse e favorita título para alimentar o motor de recomendação
 
-#### 4. Estatísticas
+#### Estatísticas
 
 Painel analítico para visualização de métricas de negócio e distribuição do acervo.
 
@@ -121,7 +129,9 @@ Painel analítico para visualização de métricas de negócio e distribuição 
 | **Data Analysis** | **Pandas** | `^2.3.3` | Biblioteca utilizada para manipulação de dataframes e estruturação de tabelas |
 | **Comunicação** | **Requests** | `^2.32.5` | Biblioteca para realizar requisições HTTP à API central e consumo de JSON |
 | **Sessão** | **Cookies Controller**| `^0.0.3` | Ferramenta para gestão de persistência de tokens JWT e estado do usuário |
-| **Gerenciamento** | **Poetry** | `2.2.1` | Gerenciador de dependências e ambientes virtuais |
+| **Linguagem** | **Python** | `>=3.11, <3.14` | Linguagem de programação base para o desenvolvimento dos scripts |
+| **Infraestrutura** | **Docker** | `3.8 (Compose)` | Ferramenta de containerização que garante a paridade entre ambientes |
+| **Gerenciamento** | **Poetry** | `2.2.1` | Gerenciador de pacotes e ambientes virtuais utilizado para garantir a reprodutibilidade das dependências do projeto |
 
 ### Integrações
 
