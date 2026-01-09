@@ -131,7 +131,7 @@ Painel analítico para visualização de métricas de negócio e distribuição 
 
 ### Integrações
 
-Este aplicativo web depende da comunicação com a API.
+Este aplicativo web faz requisições a uma API RESTful desenvolvida com Flask que gerencia o banco de dados e um motor de recomendação cujo fluxo de atualização e processamento é orquestrado pelo Apache Airflow.
 
 Link para o repositório da API: https://github.com/postech-mlengineering/postech-ml-techchallenge-fase-1-api
 
