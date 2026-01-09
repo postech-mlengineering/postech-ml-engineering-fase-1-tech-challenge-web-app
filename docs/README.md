@@ -1,4 +1,4 @@
-# Repositório do Streamlit para o Tech Challenge da Fase 1 da Pós-Graduação em Machine Learning Engineering da FIAP
+# Repositório do Aplicativo Web para o Tech Challenge da Fase 1 da Pós-Graduação em Machine Learning Engineering da FIAP
 
 Este repositório consiste em um aplicativo web desenvolvido com Streamlit cujo objetivo é disponibilizar uma interface de usuário intuitiva e responsiva, projetada para o consumo das funcionalidades da API BooksToScrape.
 
