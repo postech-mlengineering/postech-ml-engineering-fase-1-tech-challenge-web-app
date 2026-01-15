@@ -14,7 +14,7 @@ def get_all_book_titles() -> List[Dict[str, str]]:
         Uma lista de dicionários contendo os títulos. Ex: [{'title': '...'}].
     '''
     try:
-        response = api_request('GET', '/books/titles')
+        response = api_request('GET', '/api/v1/books/titles')
         if response.status_code == 200:
             return response.json()
         return []
@@ -34,7 +34,7 @@ def get_book_details(book_id: Union[int, str]) -> Optional[Dict[str, Any]]:
         Dicionário com os detalhes do livro ou None se houver falha.
     '''
     try:
-        response = api_request('GET', f'/books/details/{book_id}')
+        response = api_request('GET', f'/api/v1/books/details/{book_id}')
         if response.status_code == 200:
             return response.json()
         return None
@@ -62,7 +62,7 @@ def get_books_by_search(
     if genre: params['genre'] = genre
     
     try:
-        response = api_request('GET', '/books/search', params=params)
+        response = api_request('GET', '/api/v1/books/search', params=params)
         if response.status_code == 200:
             return response.json()
         
@@ -90,7 +90,7 @@ def get_books_by_price_range(
     '''
     params = {'min': min_price, 'max': max_price}
     try:
-        response = api_request('GET', '/books/price-range', params=params)
+        response = api_request('GET', '/api/v1/books/price-range', params=params)
         if response.status_code == 200:
             return response.json()
         return []
@@ -111,7 +111,7 @@ def get_top_rated(limit: int = 1000) -> List[Dict[str, Any]]:
     '''
     params = {'limit': limit}
     try:
-        response = api_request('GET', '/books/top-rated', params=params)
+        response = api_request('GET', '/api/v1/books/top-rated', params=params)
         if response.status_code == 200:
             return response.json()
         return []

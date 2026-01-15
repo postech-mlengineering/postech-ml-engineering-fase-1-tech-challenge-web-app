@@ -17,7 +17,7 @@ def get_user_preferences(user_id: int) -> Optional[List[Dict[str, Any]]]:
         Lista de dicionários com as recomendações com detalhes dos livros
     '''
     try:
-        response = api_request('GET', f'/ml/user-preferences/{user_id}')
+        response = api_request('GET', f'/api/v1/ml/user-preferences/{user_id}')
         
         if response.status_code == 200:
             return response.json()

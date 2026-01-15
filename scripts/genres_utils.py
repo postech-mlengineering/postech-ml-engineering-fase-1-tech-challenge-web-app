@@ -14,7 +14,7 @@ def get_all_genres() -> List[Dict[str, str]]:
         Uma lista de dicionários contendo os gêneros
     '''
     try:
-        response = api_request('GET', '/genres')
+        response = api_request('GET', '/api/v1/genres')
         
         if response.status_code == 200:
             return response.json()

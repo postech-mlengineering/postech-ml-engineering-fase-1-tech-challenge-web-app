@@ -17,7 +17,7 @@ def get_stats_overview() -> Optional[Dict[str, Any]]:
             - rating_distribution (list): Lista de dicts com 'rating' e 'count'
     '''
     try:
-        response = api_request('GET', '/stats/overview')
+        response = api_request('GET', '/api/v1/stats/overview')
         
         if response.status_code == 200:
             return response.json()
@@ -39,7 +39,7 @@ def get_stats_by_genre() -> List[Dict[str, Any]]:
             - avg_price (float): Média de preço naquela categoria
     '''
     try:
-        response = api_request('GET', '/stats/genres')
+        response = api_request('GET', '/api/v1/stats/genres')
         
         if response.status_code == 200:
             return response.json()

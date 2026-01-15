@@ -105,7 +105,7 @@ def api_request(
     access_token = cookies[0]
     refresh_token = cookies[1]
     
-    url = f'{URL_BASE}{endpoint}'
+    url = f'{API_URL}{endpoint}'
     headers = {'Authorization': f'Bearer {access_token}'}
     try:
         response = requests.request(
@@ -113,7 +113,7 @@ def api_request(
         )
         if response.status_code == 401 and refresh_token:
             refresh_response = requests.post(
-                f'{URL_BASE}/auth/refresh',
+                f'{API_URL}/api/v1/auth/refresh',
                 headers={'Authorization': f'Bearer {refresh_token}'},
                 timeout=5
             )
@@ -135,4 +135,4 @@ def api_request(
 
 controller = CookieController()
 
-URL_BASE = os.getenv("API_URL", "http://localhost:5000/api/v1")
+API_URL = os.getenv('API_URL', 'http://localhost:5000')

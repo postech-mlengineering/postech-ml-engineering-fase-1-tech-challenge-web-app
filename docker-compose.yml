@@ -5,10 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - ${ENV_FILE_PATH:-.env}
     ports:
       - "8501:8501"
-    environment:
-     - API_URL=http://18.208.50.37:5000/api/v1
     volumes:
       - .:/app
     command: ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

@@ -1,6 +1,6 @@
 import logging
 import requests
-from scripts import set_all_cookies, URL_BASE
+from scripts import set_all_cookies, API_URL
 from typing import Tuple, Optional, Union, Dict, Any
 
 
@@ -16,7 +16,7 @@ def login(usuario: str, senha: str) -> Tuple[Optional[str], Optional[str]]:
     '''
     try:
         response = requests.post(
-            f'{URL_BASE}/auth/login', 
+            f'{API_URL}/api/v1/auth/login',
             json={'username': usuario, 'password': senha}, 
             timeout=5
         )
@@ -35,7 +35,7 @@ def login(usuario: str, senha: str) -> Tuple[Optional[str], Optional[str]]:
             error_msg = f'Erro no servidor ({response.status_code})'
         return False, error_msg
     except requests.exceptions.ConnectionError:
-        logger.error(f'Falha de conexão: {URL_BASE}')
+        logger.error(f'Falha de conexão: {API_URL}/api/v1/auth/login')
         return False, 'Não foi possível conectar ao servidor.'
     except Exception as e:
         logger.error(f'error: {e}')
@@ -55,7 +55,7 @@ def register(usuario: str, senha: str) -> Tuple[bool, Union[str, Dict[str, Any]]
     '''
     try:
         response = requests.post(
-            f'{URL_BASE}/auth/register', 
+            f'{API_URL}/api/v1/auth/register', 
             json={'username': usuario, 'password': senha}, 
             timeout=5
         )
@@ -78,7 +78,7 @@ def register(usuario: str, senha: str) -> Tuple[bool, Union[str, Dict[str, Any]]
             error_msg = f'Erro no servidor ({response.status_code})'
         return False, error_msg
     except requests.exceptions.ConnectionError:
-        logger.error(f'Falha de conexão em register: {URL_BASE}')
+        logger.error(f'Falha de conexão em register: {API_URL}/api/v1/auth/register')
         return False, 'Erro de conexão: servidor offline.'
     except Exception as e:
         logger.error(f'error: {e}')
