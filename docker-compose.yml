@@ -1,14 +1,24 @@
-version: '3.8'
-
 services:
-  streamlit-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  web-app:
+    build: .
+    container_name: postech_mlengineering_web_app
+    restart: always
     env_file:
-      - ${ENV_FILE_PATH:-.env}
+      - .env
     ports:
       - "8501:8501"
     volumes:
       - .:/app
     command: ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+    networks:
+      - postech_mlengineering_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+networks:
+  postech_mlengineering_network:
+    external: true
