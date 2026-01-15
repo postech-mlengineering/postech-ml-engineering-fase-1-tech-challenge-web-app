@@ -2,6 +2,7 @@ import logging
 import streamlit as st
 import requests
 from streamlit_cookies_controller import CookieController
+import os
 from typing import Tuple, Optional, Any, Dict
 
 
@@ -134,4 +135,4 @@ def api_request(
 
 controller = CookieController()
 
-URL_BASE = 'http://192.168.15.9:5000/api/v1'
+URL_BASE = os.getenv("API_URL", "http://localhost:5000/api/v1")
