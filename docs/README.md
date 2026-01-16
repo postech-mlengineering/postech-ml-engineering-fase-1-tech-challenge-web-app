@@ -8,49 +8,7 @@ Como resultado, a solução consolidou uma experiência de navegação completa 
 
 O diagrama abaixo ilustra a arquitetura do projeto na sua integridade e com suas principais funcionalidades:
 
-```mermaid
-graph LR
-    subgraph External_Source ["Fonte de Dados"]
-        Web["Books to Scrape"]
-    end
-
-    subgraph Orchestration_Layer ["Orquestração"]
-        Airflow["Apache Airflow"]
-    end
-
-    subgraph App_Layer ["API"]
-        direction TB
-        Scraper["Scraper"]
-        MLEngine["ML Engine"]
-        Auth["JWT"]
-    end
-
-    subgraph Storage_Layer ["Persistência"]
-        direction TB
-        DB[("PostgreSQL/SQLite")]
-        PKL["ML Engine Artifacts"]
-    end
-
-    subgraph Presentation_Layer ["Aplicativo Web"]
-        Streamlit["Streamlit"]
-    end
-
-    %% Fluxos de Automação
-    Airflow --> Scraper
-    Airflow --> MLEngine
-
-    %% Fluxos de Dados
-    Scraper --> Web
-    Scraper --> DB
-    MLEngine --> DB
-    MLEngine --> PKL
-
-    %% Fluxo do Usuário
-    Streamlit --> Auth
-    Auth --> MLEngine
-    MLEngine --> PKL
-    MLEngine --> Streamlit
-```
+<br><p align='center'><img src='https://github.com/postech-mlengineering/postech-ml-engineering-fase-1-tech-challenge-api/blob/9cc654c78d0fbc3a3b8c7f85d4841364127b5cdd/docs/arquitetura.svg' alt='Arquitetura'></p>
 
 ### Pré-requisitos
 
