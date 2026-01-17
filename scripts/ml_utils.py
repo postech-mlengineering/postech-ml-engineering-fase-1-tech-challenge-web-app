@@ -51,12 +51,12 @@ def input_user_preferences(book_id: int) -> Tuple[Optional[List[Dict[str, Any]]]
         book_title = detalhes.get('title')
         payload = {'title': book_title}
         
-        response = api_request('GET', '/ml/predictions', data=payload)
+        response = api_request('GET', '/api/v1/ml/predictions', data=payload)
         
         if response.status_code == 200:
             return response.json(), None
         try:
-            error_msg = response.json().get("error", 'Erro ao processar recomendações.')
+            error_msg = response.json().get('error', 'Erro ao processar recomendações.')
         except:
             error_msg = f'Erro no servidor (Status {response.status_code})'
         return None, error_msg
