@@ -20,6 +20,7 @@ Clone o repositório e instale as dependências:
 
 ```bash
 git clone https://github.com/jorgeplatero/postech-ml-techchallenge-fase-1-streamlit.git
+
 cd postech-ml-techchallenge-fase-1-streamlit
 
 poetry install
